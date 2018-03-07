@@ -1,0 +1,35 @@
+import {
+    Component,
+    ComponentFactoryResolver,
+    Injectable,
+    Inject,
+    ReflectiveInjector
+} from '@angular/core';
+import { BodyContentComponent } from '../app/content/body/body.component';
+import { HeaderContentComponent } from '../app/content/header/header.component';
+import { ViewContainerRef } from '@angular/core';
+
+@Injectable()
+export class LoaderService {
+    rootViewContainer: ViewContainerRef;
+    constructor(@Inject(ComponentFactoryResolver) public factoryResolver) { }
+
+    setRootViewContainerRef(viewContainerRef) {
+        this.rootViewContainer = viewContainerRef;
+    }
+    addBodyComponent(name: string = '') {
+        const factory = this.factoryResolver.resolveComponentFactory(BodyContentComponent);
+        const component = factory.create(this.rootViewContainer.parentInjector);
+        this.rootViewContainer.insert(component.hostView);
+    }
+    addHeaderComponent() {
+        const factory = this.factoryResolver.resolveComponentFactory(HeaderContentComponent);
+        const component = factory.create(this.rootViewContainer.parentInjector);
+        this.rootViewContainer.insert(component.hostView);
+    }
+    clearComponent() {
+        if (this.rootViewContainer) {
+            this.rootViewContainer.clear();
+        }
+    }
+}

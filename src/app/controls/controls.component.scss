@@ -1,0 +1,23 @@
+.app-controls {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.app-controls {
+  button {
+    background-color: red;
+    padding: 4px;
+    color: greenyellow;
+  }
+  .grids_box{
+    div{
+      padding: 4px;
+      font-size: 12px;
+    }
+    div:hover {
+      background: gray;
+      color: deepskyblue;
+      cursor: pointer;
+    }
+  }
+}
