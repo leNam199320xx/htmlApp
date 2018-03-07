@@ -3,10 +3,18 @@
     grid {{gridSelected}}
   </button>
 
-  <div class="grids_box" *ngIf='isGridsBox'>
+  <div class="grids-box" *ngIf='isGridsBox'>
     <div class="grid_1" (click)='selectContent($event)'>grid 1</div>
     <div class="grid_2" (click)='selectContent($event)'>grid 2</div>
     <div class="grid_3" (click)='selectContent($event)'>grid 3</div>
     <div class="grid_4" (click)='selectContent($event)'>grid 4</div>
+  </div>
+
+  <div class='header-selection' *ngIf='bodyShowing'>
+    <select (change)='selectHeader($event)'>
+      <option value="1">small</option>
+      <option value="2">medium</option>
+      <option value="3">large</option>
+    </select>
   </div>
 </div>

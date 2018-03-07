@@ -14,6 +14,7 @@ export class ControlsComponent implements OnInit {
     public gridSelected = 0;
     private subscription: Subscription;
     isGridsBox = false;
+    bodyShowing = false;
     constructor(private commonService: CommonService,
         @Inject(LoaderService) public loaderService: LoaderService,
         @Inject(ViewContainerRef) public viewContainerRef: ViewContainerRef
@@ -35,5 +36,13 @@ export class ControlsComponent implements OnInit {
         this.commonService.showNoti(data);
         this.loaderService.setRootViewContainerRef(this.viewContainerRef);
         this.loaderService.addBodyComponent();
+        this.bodyShowing = true;
+    }
+
+    selectHeader(event: Event) {
+    }
+
+    clear() {
+        this.loaderService.clearComponent();
     }
 }
