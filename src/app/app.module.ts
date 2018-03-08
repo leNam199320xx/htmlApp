@@ -21,6 +21,8 @@ import { FooterContentComponent } from './content/footer/footer.component';
 import { GridContentComponent } from './content/grid/grid.component';
 import { ButtonContentComponent } from './content/Button/button.component';
 
+// import {HeaderModel} from './models/HeaderModel';
+
 @NgModule({
   declarations: [
     AppComponent,

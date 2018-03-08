@@ -1,29 +1,27 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { ControlsService } from '../../controls/controls.service';
+import { HeaderModel } from '../../models/HeaderModel';
 @Component({
     selector: 'app-content-dynamic-header',
     templateUrl: 'header.html',
     styleUrls: ['header.html']
 })
 
-export class HeaderContentComponent {
-    defaultHeader: Header = {
-        height: 10,
-        fontSize: 10,
-        align: 'center',
-        numberOfItems: 4
+export class HeaderContentComponent implements OnInit {
+    defaultHeader: HeaderModel = {
+        height: 0,
+        fontSize: 0,
+        element: null
     };
-    currentHeader: Header;
-    constructor() {
-        this.currentHeader = this.defaultHeader;
-    }
-    changeHeader(_header: Header) {
-        this.currentHeader = _header;
-    }
-}
+    currentHeader = this.defaultHeader;
 
-export interface Header {
-    height: number;
-    fontSize: number;
-    align: string;
-    numberOfItems: number;
+    @ViewChild('header') Header: ElementRef;
+
+    constructor(private controlsService: ControlsService) {
+        controlsService.header = this.currentHeader;
+    }
+
+    ngOnInit() {
+        this.currentHeader.element = this.Header;
+    }
 }

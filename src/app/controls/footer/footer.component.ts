@@ -14,5 +14,5 @@ export class FooterControlsComponent {
 }
 
 export interface FooterControlsModel {
-
+    id: number;
 }

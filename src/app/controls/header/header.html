@@ -1,8 +1,20 @@
-<div class='header-selection'>
+<div class='header-size'>
   header size
-  <select (change)='selectHeader($event)'>
-    <option value="1">small</option>
-    <option value="2">medium</option>
-    <option value="3">large</option>
+  <select #headerHeight (change)='selectHeader($event)'>
+    <option value="{{headerSize.small}}">{{headerSize.small}}</option>
+    <option value="{{headerSize.normal}}">{{headerSize.normal}}</option>
+    <option value="{{headerSize.large}}">{{headerSize.large}}</option>
+  </select>
+</div>
+<div class="header-fontSize">
+  header font size
+  <input #headerFontSize type="number" (input)='inpHeaderFontSize($event)' />
+</div>
+<div class='header-backgroundColor'>
+  header background
+  <select #headerBackgroundColor (change)='selectBackgroundColor($event)'>
+    <option value="red">red</option>
+    <option value="blue">blue</option>
+    <option value="yellow">yellow</option>
   </select>
 </div>

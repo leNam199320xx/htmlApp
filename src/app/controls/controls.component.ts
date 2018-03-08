@@ -20,7 +20,9 @@ export class ControlsComponent implements OnInit {
     bodyShowing = false;
     layout = Layout;
 
-    constructor(private commonService: CommonService, private controlsService: ControlsService,
+    constructor(
+        private commonService: CommonService,
+        private controlsService: ControlsService,
         @Inject(LoaderService) public loaderService: LoaderService,
         @Inject(ViewContainerRef) public viewContainerRef: ViewContainerRef
     ) {
@@ -49,11 +51,9 @@ export class ControlsComponent implements OnInit {
         this.layouSelected = value;
 
         if (value === Layout.Header) {
-
         } else if (value === Layout.Main) {
             this.controlsService.mainGrid = (<any>this.loaderService.bodyComponent.Main).grid;
         } else if (value === Layout.Footer) {
-
         }
     }
 

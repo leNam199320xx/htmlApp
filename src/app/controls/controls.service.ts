@@ -1,27 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ElementRef } from '@angular/core';
 import { GridModel } from '../content/grid/grid.component';
-import { HeaderControlsModel } from './header/header.component';
 import { MainControlsModel } from './main/main.component';
 import { FooterControlsModel } from './footer/footer.component';
+import { HeaderModel } from '../models/HeaderModel';
 
 @Injectable()
 export class ControlsService {
-    header: HeaderControlsModel;
-    main: MainControlsModel;
-    footer: FooterControlsModel;
+    header: HeaderModel;
     mainGrid: GridModel;
     constructor() {
 
-    }
-    setHeader(_h: HeaderControlsModel) {
-        this.header = _h;
-    }
-
-    setMain(_m: MainControlsModel) {
-        this.main = _m;
-    }
-
-    setFooter(_f: FooterControlsModel) {
-        this.footer = _f;
     }
 }
