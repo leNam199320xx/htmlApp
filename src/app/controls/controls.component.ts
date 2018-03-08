@@ -2,23 +2,29 @@ import { Component, ViewChild, ElementRef, OnInit, Inject, ViewContainerRef } fr
 import { CommonService } from '../../services/common.service';
 import { Subscription } from 'rxjs/Subscription';
 import { LoaderService } from '../../services/loader.service';
+import { GridModel } from '../content/grid/grid.component';
+import { ControlsService } from './controls.service';
 
 @Component({
     selector: 'app-controls',
-    templateUrl: './controls.component.html',
-    styleUrls: ['./controls.component.scss']
+    templateUrl: 'controls.html',
+    styleUrls: ['controls.scss']
 })
 export class ControlsComponent implements OnInit {
     @ViewChild('btnDefineGrid') btnDefineGrid: ElementRef;
     private _btnDefineGrid: HTMLDivElement;
-    public gridSelected = 0;
     private subscription: Subscription;
     isGridsBox = false;
+    layouSelected = 0;
+    gridSelected = 0;
     bodyShowing = false;
-    constructor(private commonService: CommonService,
+    layout = Layout;
+
+    constructor(private commonService: CommonService, private controlsService: ControlsService,
         @Inject(LoaderService) public loaderService: LoaderService,
         @Inject(ViewContainerRef) public viewContainerRef: ViewContainerRef
     ) {
+        this.loaderService.rootViewContainer = this.viewContainerRef;
     }
 
     ngOnInit() {
@@ -34,15 +40,31 @@ export class ControlsComponent implements OnInit {
         this.gridSelected = parseInt((<HTMLDivElement>event.target).className.split('_')[1], 10);
         const data = 'page ' + this.gridSelected + ' selected';
         this.commonService.showNoti(data);
-        this.loaderService.setRootViewContainerRef(this.viewContainerRef);
         this.loaderService.addBodyComponent();
         this.bodyShowing = true;
     }
 
-    selectHeader(event: Event) {
+    selectControlsForLayout(event: Event) {
+        const value = parseInt((<HTMLSelectElement>event.target).value, 10);
+        this.layouSelected = value;
+
+        if (value === Layout.Header) {
+
+        } else if (value === Layout.Main) {
+            this.controlsService.mainGrid = (<any>this.loaderService.bodyComponent.Main).grid;
+        } else if (value === Layout.Footer) {
+
+        }
     }
 
     clear() {
         this.loaderService.clearComponent();
     }
+}
+
+
+export enum Layout {
+    Header = 0,
+    Main = 1,
+    Footer = 2
 }

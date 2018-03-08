@@ -1,4 +1,4 @@
-import { Component, Inject, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { LoaderService } from '../../../services/loader.service';
 
 @Component({
@@ -7,11 +7,11 @@ import { LoaderService } from '../../../services/loader.service';
     styleUrls: ['./body.component.scss']
 })
 
-export class BodyContentComponent {
-    headerSelect = '';
-    constructor() {
-    }
-    changeHeaderHeight() {
-        this.headerSelect = (<HTMLDivElement>event.target).className.split('_')[1];
+export class BodyContentComponent implements OnInit {
+    @ViewChild('Header') Header: ElementRef;
+    @ViewChild('Main') Main: ElementRef;
+    @ViewChild('Footer') Footer: ElementRef;
+
+    ngOnInit() {
     }
 }

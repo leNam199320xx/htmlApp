@@ -4,8 +4,8 @@ import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'app-content',
-    templateUrl: './content.component.html',
-    styleUrls: ['./content.component.scss']
+    templateUrl: 'content.html',
+    styleUrls: ['content.scss']
 })
 export class ContentComponent implements OnDestroy {
     title = '';

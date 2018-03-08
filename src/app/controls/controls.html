@@ -1,0 +1,32 @@
+<div class="app-controls">
+  <button #btnDefineGrid (click)='openGridsBox()'>
+    grid {{gridSelected}}
+  </button>
+
+  <div class="grids-box" *ngIf='isGridsBox'>
+    <div class="grid_1" (click)='selectContent($event)'>grid 1</div>
+    <div class="grid_2" (click)='selectContent($event)'>grid 2</div>
+    <div class="grid_3" (click)='selectContent($event)'>grid 3</div>
+    <div class="grid_4" (click)='selectContent($event)'>grid 4</div>
+  </div>
+
+  <div class="controls-selection">
+    Layout for: 
+    <select (change)='selectControlsForLayout($event)'>
+      <option value="0">Header</option>
+      <option value="1">Main</option>
+      <option value="2">Footer</option>
+    </select>
+  </div>
+
+  <div *ngIf='layouSelected === layout.Header'>
+    <app-controls-header></app-controls-header>
+  </div>
+  <div *ngIf='layouSelected === layout.Main'>
+    <app-controls-main></app-controls-main>
+  </div>
+  <div *ngIf='layouSelected === layout.Footer'>
+    <app-controls-footer></app-controls-footer>
+  </div>
+
+</div>
