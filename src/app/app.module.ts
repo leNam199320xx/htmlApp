@@ -1,27 +1,40 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
+
 import { CommonService } from '../services/common.service';
 import { WindowService } from '../services/window.service';
 import { LoaderService } from '../services/loader.service';
+import { ControlsService } from './controls/controls.service';
+
+import { AppComponent } from './app.component';
 import { ControlsComponent } from '../app/controls/controls.component';
+import { HeaderControlsComponent } from '../app/controls/header/header.component';
+import { MainControlsComponent } from '../app/controls/main/main.component';
+import { FooterControlsComponent } from '../app/controls/footer/footer.component';
 import { ContentComponent } from '../app/content/content.component';
-import { HttpClientModule } from '@angular/common/http';
+
 import { BodyContentComponent } from './content/body/body.component';
 import { HeaderContentComponent } from './content/header/header.component';
 import { MainContentComponent } from './content/main/main.component';
 import { FooterContentComponent } from './content/footer/footer.component';
-
+import { GridContentComponent } from './content/grid/grid.component';
+import { ButtonContentComponent } from './content/Button/button.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContentComponent,
     ControlsComponent,
+    HeaderControlsComponent,
+    MainControlsComponent,
+    FooterControlsComponent,
+    ControlsComponent,
     BodyContentComponent,
     HeaderContentComponent,
     MainContentComponent,
-    FooterContentComponent
+    FooterContentComponent,
+    GridContentComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +43,8 @@ import { FooterContentComponent } from './content/footer/footer.component';
   providers: [
     WindowService,
     CommonService,
-    LoaderService
+    LoaderService,
+    ControlsService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
