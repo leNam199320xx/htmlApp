@@ -11,6 +11,8 @@ export class HeaderContentComponent implements OnInit {
     defaultHeader: HeaderModel = {
         height: 0,
         fontSize: 0,
+        backgroundColor: '',
+        color: '',
         element: null
     };
     currentHeader = this.defaultHeader;
@@ -18,6 +20,7 @@ export class HeaderContentComponent implements OnInit {
     @ViewChild('header') Header: ElementRef;
 
     constructor(private controlsService: ControlsService) {
+        console.log('- header');
         controlsService.header = this.currentHeader;
     }
 

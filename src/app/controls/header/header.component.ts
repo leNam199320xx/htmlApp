@@ -13,9 +13,12 @@ export class HeaderControlsComponent implements OnInit {
     private defaultHeader: HeaderModel = {
         fontSize: 10,
         height: HeaderSizeDefine.normal,
+        backgroundColor: 'blue',
+        color: 'white',
         element: null
     };
     headerSize = HeaderSizeDefine;
+    header: HTMLElement;
 
     @ViewChild('headerHeight') HeaderHeightElement: ElementRef;
     @ViewChild('headerFontSize') HeaderFontSizeElement: ElementRef;
@@ -25,8 +28,12 @@ export class HeaderControlsComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log('header inited: ', this.controlsService.headerCreated);
         this.currentHeader = this.controlsService.header;
-        this.setDefault();
+        if (!this.controlsService.headerCreated) {
+            this.controlsService.headerCreated = true;
+            this.setDefault();
+        }
     }
 
     selectHeader(event: Event) {
@@ -36,9 +43,9 @@ export class HeaderControlsComponent implements OnInit {
     }
 
     selectBackgroundColor(event: Event) {
-        // const val = (<HTMLSelectElement>event.target).value;
-        // this.currentHeader.fontSize = val;
-        // this.updateLayout();
+        const val = (<HTMLSelectElement>event.target).value;
+        this.currentHeader.backgroundColor = val;
+        this.updateLayout();
     }
 
     inpHeaderFontSize(event: Event) {
@@ -47,23 +54,37 @@ export class HeaderControlsComponent implements OnInit {
         this.updateLayout();
     }
 
+    inpBackgroundColor(event: Event) {
+        const val = (<HTMLSelectElement>event.target).value;
+        this.currentHeader.backgroundColor = val;
+        this.updateLayout();
+    }
+
+    inpColor(event: Event) {
+        const val = (<HTMLSelectElement>event.target).value;
+        this.currentHeader.color = val;
+        this.updateLayout();
+    }
+
     setDefault() {
         this.currentHeader.height = this.defaultHeader.height;
         this.currentHeader.fontSize = this.defaultHeader.fontSize;
-
+        this.currentHeader.backgroundColor = this.defaultHeader.backgroundColor;
+        this.currentHeader.color = this.defaultHeader.color;
         this.updateValueOftControls();
         this.updateLayout();
     }
 
     updateValueOftControls() {
         this.HeaderFontSizeElement.nativeElement.value = this.defaultHeader.fontSize;
-
     }
 
     updateLayout() {
-        this.currentHeader.element.nativeElement.style.height = this.currentHeader.height + 'px';
-        this.currentHeader.element.nativeElement.style.fontSize = this.currentHeader.fontSize + 'px';
-        // this.currentHeader.element.nativeElement.style.lineHeight = this.currentHeader.fontSize + 'px';
+        this.header = <HTMLElement>this.currentHeader.element.nativeElement;
+        this.header.style.height = this.currentHeader.height + 'px';
+        this.header.style.fontSize = this.currentHeader.fontSize + 'px';
+        this.header.style.backgroundColor = this.currentHeader.backgroundColor;
+        this.header.style.color = this.currentHeader.color;
     }
 
 }

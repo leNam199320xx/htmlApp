@@ -7,6 +7,7 @@ import { HeaderModel } from '../models/HeaderModel';
 @Injectable()
 export class ControlsService {
     header: HeaderModel;
+    headerCreated = false;
     mainGrid: GridModel;
     constructor() {
 

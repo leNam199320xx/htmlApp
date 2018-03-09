@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ControlsService } from '../controls.service';
 
 @Component({
     selector: 'app-controls-footer',
@@ -8,7 +9,7 @@ import { Component } from '@angular/core';
 
 
 export class FooterControlsComponent {
-    constructor() {
+    constructor(private controlsService: ControlsService) {
 
     }
 }
