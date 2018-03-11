@@ -1,0 +1,113 @@
+$color-red: red;
+$color-blue: blue;
+$color-black: black;
+$color-white: white;
+$pm-1: 1em;
+$pm-05: 0.5em;
+$pm-025: 0.25em;
+$btn-size-small: 24px;
+$btn-size-normal: 30px;
+$btn-size-large: 40px;
+$bder-size-small: 1px;
+$bder-size-normal: 2px;
+$bder-size-large: 4px;
+.col-1 {
+    width: 8.33%;
+}
+
+.col-2 {
+    width: 16.66%;
+}
+
+.col-3 {
+    width: 25%;
+}
+
+.col-4 {
+    width: 33.33%;
+}
+
+.col-5 {
+    width: 41.66%;
+}
+
+.col-6 {
+    width: 50%;
+}
+
+.col-7 {
+    width: 58.33%;
+}
+
+.col-8 {
+    width: 66.66%;
+}
+
+.col-9 {
+    width: 75%;
+}
+
+.col-10 {
+    width: 83.33%;
+}
+
+.col-11 {
+    width: 91.66%;
+}
+
+.col-12 {
+    width: 100%;
+}
+
+.border-none {
+    border: none;
+}
+
+// mixin
+@mixin border($px, $color) {
+    border: solid $px $color
+}
+
+@mixin calculateFont ($size) {
+    font-size: $size/ 2;
+    line-height: $size/ 2;
+    height: $size;
+}
+
+// border
+.nam-border {
+    &.red {
+        border-color: $color-red;
+    }
+    &.blue {
+        border-color: $color-blue;
+    }
+    &.black {
+        border-color: $color-black;
+    }
+    
+    &.large {
+        border-width: $bder-size-large;
+    }
+    &.small {
+        border-width: $bder-size-small;
+    }
+    &.normal {
+        border-width: $bder-size-normal;
+    }
+}
+
+// device: 'desktop'
+@media (min-width: 1280px) {}
+
+// device: 'tablet-landscape'
+@media (min-width: 960px) and (max-width: 1289px) and (orientation:landscape) {}
+
+// device: 'tablet-portrait'
+@media (min-width: 600px) and (max-width: 839px) {}
+
+// device: 'mobile-landscape'
+@media (min-width: 480px) and (max-width: 959px) and (orientation:landscape) {}
+
+// device: 'mobile-portrait'
+@media (min-width: 0px) and (max-width: 599px) {}

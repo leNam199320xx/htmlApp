@@ -1,21 +1,11 @@
 <div class="app-controls">
-  <button #btnDefineGrid (click)='openGridsBox()'>
-    grid {{gridSelected}}
-  </button>
-  <div class="grids-box" *ngIf='isGridsBox'>
-    <div class="grid_1" (click)='selectContent($event)'>grid 1</div>
-    <div class="grid_2" (click)='selectContent($event)'>grid 2</div>
-    <div class="grid_3" (click)='selectContent($event)'>grid 3</div>
-    <div class="grid_4" (click)='selectContent($event)'>grid 4</div>
-  </div>
+  <nam-button namClass='nam-button large border-none' text='large button'></nam-button>
+  <nam-button namClass='nam-button normal border-none' text='normal button'></nam-button>
+  <nam-button namClass='nam-button small border-none' text='small button'></nam-button>
+  <nam-select [namOptions]='templateOptions' (change)='selectContent($event)'></nam-select>
   <div *ngIf='bodyShowing'>
-    <div class="controls-selection">
-      Layout for:
-      <select (change)='selectControlsForLayout($event)'>
-        <option value="0">Header</option>
-        <option value="1">Main</option>
-        <option value="2">Footer</option>
-      </select>
+    <div>Layout for:
+      <nam-select [namOptions]='layourOptions' (change)='selectControlsForLayout($event)'></nam-select>
     </div>
     <div *ngIf='layouSelected === layout.Header'>
       <app-controls-header></app-controls-header>

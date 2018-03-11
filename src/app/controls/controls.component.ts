@@ -7,19 +7,28 @@ import { ControlsService } from './controls.service';
 
 @Component({
     selector: 'app-controls',
-    templateUrl: 'controls.html',
-    styleUrls: ['controls.scss']
+    templateUrl: 'controls.html'
 })
 export class ControlsComponent implements OnInit {
-    @ViewChild('btnDefineGrid') btnDefineGrid: ElementRef;
+    // @ViewChild('btnDefineGrid') btnDefineGrid: ElementRef;
     private _btnDefineGrid: HTMLDivElement;
     private subscription: Subscription;
-    isGridsBox = false;
+    // isGridsBox = false;
     layouSelected = 0;
     gridSelected = 0;
     bodyShowing = false;
     layout = Layout;
-
+    templateOptions: any[] = [
+        { text: 'temp 1', value: '1' },
+        { text: 'temp 2', value: '2' },
+        { text: 'temp 3', value: '3' },
+        { text: 'temp 4', value: '4' }
+    ];
+    layourOptions: any[] = [
+        { value: '0', text: 'Header' },
+        { value: '1', text: 'Main' },
+        { value: '2', text: 'Footer' }
+    ];
     constructor(
         private commonService: CommonService,
         private controlsService: ControlsService,
@@ -30,19 +39,18 @@ export class ControlsComponent implements OnInit {
     }
 
     ngOnInit() {
-        this._btnDefineGrid = this.btnDefineGrid.nativeElement;
     }
 
     openGridsBox() {
-        this.isGridsBox = !this.isGridsBox;
     }
 
     selectContent(event: Event) {
-        this.loaderService.clearComponent();
-        this.gridSelected = parseInt((<HTMLDivElement>event.target).className.split('_')[1], 10);
+        this.gridSelected = parseInt((<HTMLSelectElement>event.target).value, 10);
         const data = 'page ' + this.gridSelected + ' selected';
-        this.commonService.showNoti(data);
-        this.loaderService.addBodyComponent();
+        if (!this.loaderService.bodyComponent) {
+            this.commonService.showNoti(data);
+            this.loaderService.addBodyComponent();
+        }
         this.bodyShowing = true;
     }
 

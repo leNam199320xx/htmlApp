@@ -1,3 +1,22 @@
+.desktop {
+    .app-controls {
+        width: 30%;
+        padding: 1em;
+    }
+}
+
+.tablet {
+    .app-controls {
+        width: 50%;
+    }
+}
+
+.mobile {
+    .app-controls {
+        width: 100%;
+    }
+}
+
 .app-controls {
     position: absolute;
     top: 0;
@@ -5,26 +24,4 @@
     padding: 5px;
     background-color: white;
     box-shadow: 0 0 2px 0 blue;
-}
-
-.app-controls {
-    button {
-        background-color: red;
-        padding: 4px;
-        color: greenyellow;
-    }
-    .grids-box {
-        div {
-            padding: 4px;
-            font-size: 12px;
-        }
-        div:hover {
-            background: gray;
-            color: deepskyblue;
-            cursor: pointer;
-        }
-    }
-    .header-selection {
-        color: red;
-    }
 }

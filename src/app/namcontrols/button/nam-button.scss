@@ -1,0 +1,18 @@
+@import '../style/nam.variables.scss';
+.nam-button {
+    color: $color-white;
+    background-color: $color-blue;
+    padding: $pm-025;
+    @include calculateFont($btn-size-normal);
+    cursor: pointer;
+    &.large {
+        @include calculateFont($btn-size-large);
+    }
+    &.small {
+        @include calculateFont($btn-size-small);
+    }
+}
+
+.nam-button:hover {
+    background-color: $color-black;
+}

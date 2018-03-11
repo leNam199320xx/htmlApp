@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { NamControlsModule } from './namcontrols/namcontrols.module';
 
 import { CommonService } from '../services/common.service';
 import { WindowService } from '../services/window.service';
@@ -40,7 +41,8 @@ import { ButtonContentComponent } from './content/Button/button.component';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    NamControlsModule
   ],
   providers: [
     WindowService,

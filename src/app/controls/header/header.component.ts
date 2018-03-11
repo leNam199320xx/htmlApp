@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ControlsService } from '../controls.service';
 import { HeaderModel } from '../../models/HeaderModel';
+import { NamSelectModel } from '../../namcontrols/model/NamSelectModel';
 @Component({
     selector: 'app-controls-header',
     templateUrl: 'header.html',
@@ -17,7 +18,18 @@ export class HeaderControlsComponent implements OnInit {
         color: 'white',
         element: null
     };
-    headerSize = HeaderSizeDefine;
+    headerSizeOptions: NamSelectModel[] = [
+        { text: 'small', value: HeaderSizeDefine.small.toString() },
+        { text: 'normal', value: HeaderSizeDefine.normal.toString() },
+        { text: 'large', value: HeaderSizeDefine.large.toString() }
+    ];
+    colorOptions: NamSelectModel[] = [
+        { text: 'red', value: 'red' },
+        { text: 'blue', value: 'blue' },
+        { text: 'white', value: 'white' },
+        { text: 'yellow', value: 'yellow' },
+        { text: 'gray', value: 'gray' }
+    ];
     header: HTMLElement;
 
     @ViewChild('headerHeight') HeaderHeightElement: ElementRef;
@@ -45,6 +57,11 @@ export class HeaderControlsComponent implements OnInit {
     selectBackgroundColor(event: Event) {
         const val = (<HTMLSelectElement>event.target).value;
         this.currentHeader.backgroundColor = val;
+        this.updateLayout();
+    }
+    selectColor(event: Event) {
+        const val = (<HTMLSelectElement>event.target).value;
+        this.currentHeader.color = val;
         this.updateLayout();
     }
 

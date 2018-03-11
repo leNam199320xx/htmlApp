@@ -15,22 +15,22 @@ export class WindowService implements OnDestroy {
         },
         {
             query: '(min-width: 960px) and (max-width: 1289px) and (orientation:landscape)',
-            device: 'tablet-landscape',
+            device: 'tablet landscape',
             value: 1
         },
         {
             query: '(min-width: 600px) and (max-width: 839px)',
-            device: 'tablet-portrait',
+            device: 'tablet',
             value: 2
         },
         {
             query: '(min-width: 480px) and (max-width: 959px) and (orientation:landscape)',
-            device: 'mobile-landscape',
+            device: 'mobile landscape',
             value: 3
         },
         {
             query: '(min-width: 0px) and (max-width: 599px)',
-            device: 'mobile-portrait',
+            device: 'mobile',
             value: 4
         },
     ];
@@ -59,6 +59,7 @@ export class WindowService implements OnDestroy {
             const r = this.matchMedia(b.query);
             if (r.matches) {
                 this.currentBreakpoint = b;
+                this.body.className = b.device;
             }
         });
     }
@@ -82,7 +83,8 @@ export class WindowService implements OnDestroy {
         this.styleDefine.type = 'text/css';
         this.header.appendChild(this.styleDefine);
     }
-    createClass(_class: string, _val: string) {
+    createScript() {
+
     }
 }
 
