@@ -3,8 +3,7 @@ import { NamSelectModel } from '../model/NamSelectModel';
 @Component({
     // tslint:disable-next-line:component-selector
     selector: 'nam-select',
-    templateUrl: 'nam-select.html',
-    styleUrls: ['nam-select.scss']
+    templateUrl: 'nam-select.html'
 })
 
 export class NamSelectComponent {

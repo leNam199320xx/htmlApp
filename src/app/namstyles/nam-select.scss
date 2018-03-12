@@ -1,0 +1,11 @@
+.nam-select {
+    background-color: $black;
+    color: $white;
+    height: $btn-size-small;
+    cursor: pointer;
+    padding: $pm-025;
+}
+
+.nam-select:hover {
+    background-color: $blue;
+}

@@ -4,8 +4,7 @@ import { HeaderModel } from '../../models/HeaderModel';
 import { NamSelectModel } from '../../namcontrols/model/NamSelectModel';
 @Component({
     selector: 'app-controls-header',
-    templateUrl: 'header.html',
-    styleUrls: ['header.scss']
+    templateUrl: 'header.html'
 })
 
 
@@ -30,6 +29,11 @@ export class HeaderControlsComponent implements OnInit {
         { text: 'yellow', value: 'yellow' },
         { text: 'gray', value: 'gray' }
     ];
+    navAlignOptions: NamSelectModel[] = [
+        { text: 'căn trái', value: 'left' },
+        { text: 'căn giữa', value: 'center' },
+        { text: 'căn phải', value: 'right' },
+    ];
     header: HTMLElement;
 
     @ViewChild('headerHeight') HeaderHeightElement: ElementRef;
@@ -40,7 +44,6 @@ export class HeaderControlsComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('header inited: ', this.controlsService.headerCreated);
         this.currentHeader = this.controlsService.header;
         if (!this.controlsService.headerCreated) {
             this.controlsService.headerCreated = true;
@@ -88,8 +91,23 @@ export class HeaderControlsComponent implements OnInit {
         this.currentHeader.fontSize = this.defaultHeader.fontSize;
         this.currentHeader.backgroundColor = this.defaultHeader.backgroundColor;
         this.currentHeader.color = this.defaultHeader.color;
-        this.updateValueOftControls();
         this.updateLayout();
+    }
+
+    alignNavLeft(event: Event) {
+        console.log('căn trái');
+    }
+
+    alignNavRight(event: Event) {
+        console.log('căn phải');
+    }
+
+    alignNavCenter(event: Event) {
+        console.log('căn giữa');
+    }
+
+    addNavTop(event: Event) {
+        console.log('add nav');
     }
 
     updateValueOftControls() {
@@ -102,6 +120,7 @@ export class HeaderControlsComponent implements OnInit {
         this.header.style.fontSize = this.currentHeader.fontSize + 'px';
         this.header.style.backgroundColor = this.currentHeader.backgroundColor;
         this.header.style.color = this.currentHeader.color;
+        this.updateValueOftControls();
     }
 
 }

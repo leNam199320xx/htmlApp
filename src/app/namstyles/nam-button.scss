@@ -1,0 +1,23 @@
+.nam-button {
+    color: $white;
+    background-color: $blue;
+    padding: $pm-025;
+    display: inline-block;
+    cursor: pointer;
+}
+
+@mixin btnSize ($name, $size) {
+    .nam-button {
+        &.#{$name} {            
+            @include calculateFont($size);
+        }
+    }
+}
+
+@include btnSize('small', $btn-size-small);
+@include btnSize('normal', $btn-size-normal);
+@include btnSize('large', $btn-size-large);
+
+.nam-button:hover {
+    background-color: $black;
+}

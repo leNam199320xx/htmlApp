@@ -3,8 +3,7 @@ import { ControlsService } from '../controls.service';
 
 @Component({
     selector: 'app-controls-footer',
-    templateUrl: 'footer.html',
-    styleUrls: ['footer.scss']
+    templateUrl: 'footer.html'
 })
 
 

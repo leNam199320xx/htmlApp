@@ -1,21 +1,29 @@
 <div class="control-header">
-  <div class='size'>
+  <div class='row'>
     size
     <nam-select #headerHeight [namOptions]='headerSizeOptions' (change)='selectHeader($event)'></nam-select>
-
   </div>
-  <div class="fontSize">
+  <div class="row">
     font size
     <input #headerFontSize type="number" (input)='inpHeaderFontSize($event)' />
   </div>
-  <div class='backgroundColor'>
+  <div class='row'>
     background
     <nam-select #headerBackgroundColor [namOptions]='colorOptions' (change)='selectBackgroundColor($event)'></nam-select>
     <input #hearderInpBackgroundColor type="color" (input)='inpBackgroundColor($event)' />
   </div>
-  <div class='color'>
+  <div class='row'>
     color
     <nam-select #headerColor [namOptions]='colorOptions' (change)='selectColor($event)'></nam-select>
     <input #headerInpColor type="color" (input)='inpColor($event)' />
+  </div>
+
+  <div class='row'>
+    <nam-button (click)='addNavTop($event)' text='thêm điều hướng'></nam-button>
+  </div>
+  <div class='row'>
+    <nam-button (click)='alignNavLeft($event)' text='&#xE8E4;' namClass='font-SegeoIcon'></nam-button>
+    <nam-button (click)='alignNavCenter($event)' text='&#xE8E3;' namClass='font-SegeoIcon'></nam-button>
+    <nam-button (click)='alignNavRight($event)' text='&#xE8E2;' namClass='font-SegeoIcon'></nam-button>
   </div>
 </div>

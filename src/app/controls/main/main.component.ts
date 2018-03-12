@@ -4,8 +4,7 @@ import { ControlsService } from '../controls.service';
 
 @Component({
     selector: 'app-controls-main',
-    templateUrl: 'main.html',
-    styleUrls: ['main.scss']
+    templateUrl: 'main.html'
 })
 
 

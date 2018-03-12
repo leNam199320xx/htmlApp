@@ -1,7 +1,7 @@
 <div class="app-controls">
-  <nam-button namClass='nam-button large border-none' text='large button'></nam-button>
-  <nam-button namClass='nam-button normal border-none' text='normal button'></nam-button>
-  <nam-button namClass='nam-button small border-none' text='small button'></nam-button>
+  <nam-button namClass='nam-button large nam-text-red nam-bg-blue nam-line-top nam-line-blue' text='large button'></nam-button>
+  <nam-button namClass='nam-button normal nam-text-red nam-bg-blue nam-line-green nam-line-bottom nam-line-size-small' text='normal button'></nam-button>
+  <nam-button namClass='nam-button small nam-text-red nam-bg-blue nam-line-none' text='small button'></nam-button>
   <nam-select [namOptions]='templateOptions' (change)='selectContent($event)'></nam-select>
   <div *ngIf='bodyShowing'>
     <div>Layout for:

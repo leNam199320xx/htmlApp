@@ -37,10 +37,10 @@ export class WindowService implements OnDestroy {
     constructor() {
         this.setBreakpoint();
         this.createStyle([
-            <ClassDefine>{
+            {
                 name: '.name1',
                 attributes: [
-                    <ClassAttribute>{
+                    {
                         name: 'background-color',
                         value: 'black'
                     }

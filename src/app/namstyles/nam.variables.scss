@@ -1,0 +1,112 @@
+    $red: red;
+    $blue: blue;
+    $black: black;
+    $white: white;
+    $pm-1: 1em;
+    $pm-05: 0.5em;
+    $pm-025: 0.25em;
+    $btn-size-small: 24px;
+    $btn-size-normal: 30px;
+    $btn-size-large: 40px;
+    $bder-size-small: 1px;
+    $bder-size-normal: 2px;
+    $bder-size-large: 4px;
+    @for $i from 1 through 12 {
+        .col-#{$i} {
+            width: 100% / $i;
+        }
+    }
+
+    .nam-row {
+        width: 100%;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+    }
+
+    @mixin lineSize ($name, $size) {
+        .nam-line {
+            &.#{$name} {
+                border-width: #{$size};
+            }
+            border-style: solid;
+        }
+        .nam-line-size-#{$name} {
+            border-width: #{$size};
+        }
+    }
+
+    @mixin linePosition ($posi) {
+        .nam-line-#{$posi} {
+            border: none;
+        }
+    }
+
+    @include linePosition(top);
+    @include linePosition(left);
+    @include linePosition(right);
+    @include linePosition(bottom);
+
+    @include lineSize(small, $bder-size-small);
+    @include lineSize(normal, $bder-size-normal);
+    @include lineSize(large, $bder-size-large);
+    @mixin textAndBgColor ($classColor, $val) {
+        .nam-text {
+            &.#{$classColor} {
+                color: $val;
+            }
+        }
+        .nam-text-#{$classColor} {
+            color: $val;
+        }
+        .nam-bg {
+            &.bg-#{$classColor} {
+                background-color: $val;
+            }
+        }
+        .nam-bg-#{$classColor} {
+            background-color: $val;
+        }
+        .nam-line {
+            &.line-#{$classColor} {
+                border-color: $val;
+            }
+        }
+        .nam-line-#{$classColor} {
+            border-top-color: $val;
+            border-bottom-color: $val;
+            border-left-color: $val;
+            border-right-color: $val;
+        }
+    }
+
+    @include textAndBgColor('red', $red);
+    @include textAndBgColor('blue', $blue);
+    @include textAndBgColor('black', $black);
+    @include textAndBgColor('white', $white);
+    @include textAndBgColor('gray', gray);
+    @include textAndBgColor('green', green);
+    @include textAndBgColor('none', transparent);
+    @mixin calculateFont ($size) {
+        font-size: $size/ 2;
+        line-height: $size/ 2;
+        height: $size;
+    }
+
+    .font-SegeoIcon {
+        font-family: 'Segoe MDL2 Assets';
+    }
+
+    @media (min-width: 1280px) {}
+
+    // device: 'desktop'
+    // device: 'tablet-landscape'
+    @media (min-width: 960px) and (max-width: 1289px) and (orientation:landscape) {}
+
+    // device: 'tablet-portrait'
+    @media (min-width: 600px) and (max-width: 839px) {}
+
+    // device: 'mobile-landscape'
+    @media (min-width: 480px) and (max-width: 959px) and (orientation:landscape) {}
+
+    // device: 'mobile-portrait'
+    @media (min-width: 0px) and (max-width: 599px) {}
