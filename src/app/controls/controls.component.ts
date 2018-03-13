@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { LoaderService } from '../../services/loader.service';
 import { GridModel } from '../content/grid/grid.component';
 import { ControlsService } from './controls.service';
+import { WindowService, ExtFile } from '../../services/window.service';
 
 @Component({
     selector: 'app-controls',
@@ -32,6 +33,7 @@ export class ControlsComponent implements OnInit {
     constructor(
         private commonService: CommonService,
         private controlsService: ControlsService,
+        private windowService: WindowService,
         @Inject(LoaderService) public loaderService: LoaderService,
         @Inject(ViewContainerRef) public viewContainerRef: ViewContainerRef
     ) {
@@ -67,6 +69,15 @@ export class ControlsComponent implements OnInit {
 
     clear() {
         this.loaderService.clearComponent();
+    }
+
+    downloadFile(event: Event) {
+        const file1 = this.windowService.saveFile('function hello() {}', 'nam', ExtFile.JS, false, false);
+        const file2 = this.windowService.saveFile('body {}', 'nam', ExtFile.CSS, false, false);
+        const file3 = this.windowService.saveFile('<div>xin chào các bạn</div>', 'nam', ExtFile.HTML, true, true);
+        file1.click();
+        file2.click();
+        file3.click();
     }
 }
 

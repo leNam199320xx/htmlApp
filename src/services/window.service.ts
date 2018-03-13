@@ -86,6 +86,38 @@ export class WindowService implements OnDestroy {
     createScript() {
 
     }
+
+    saveFile(_text: string, _filename: string, _ext: string, _haveJs: boolean, _haveCss: boolean) {
+        if (_ext === ExtFile.HTML) {
+            _text = this.configHtmlFile(_text,
+                _haveJs ? this.configJsFile(_filename) + '.' + ExtFile.JS : '',
+                _haveCss ? this.configCssFile(_filename) + '.' + ExtFile.CSS : '');
+        }
+        const link = document.createElement('a');
+        const data = new Blob([_text], { type: 'text/plain' });
+        const file = window.URL.createObjectURL(data);
+        link.href = file;
+        link.download = _filename + '.' + _ext;
+        return link;
+    }
+
+    configHtmlFile(dataFile: string, scriptFile: string, styleFile: string) {
+        const metaUTF8 = '<meta charset="utf-8" />';
+        const metaViewbox = '<meta name="viewport" content="width=device-width, initial-scale=1">';
+        const head = '<head>' + metaUTF8 + metaViewbox + styleFile + '</head>';
+        const body = '<body>' + dataFile + scriptFile + '</body>';
+        const html = '<!DOCTYPE HTML><html>' + head + body + '</html>';
+
+        return html;
+    }
+
+    configJsFile(link: string) {
+        return '<script src="' + link + '"></script>';
+    }
+
+    configCssFile(link: string) {
+        return '<link rel="stylesheet" href="' + link + '">';
+    }
 }
 
 export interface Breakpoints {
@@ -102,4 +134,11 @@ export interface ClassDefine {
 export interface ClassAttribute {
     name: string;
     value: string;
+}
+
+
+export enum ExtFile {
+    HTML = 'html',
+    JS = 'js',
+    CSS = 'css'
 }

@@ -3,6 +3,8 @@
   <nam-button namClass='nam-button normal nam-text-red nam-bg-blue nam-line-green nam-line-bottom nam-line-size-small' text='normal button'></nam-button>
   <nam-button namClass='nam-button small nam-text-red nam-bg-blue nam-line-none' text='small button'></nam-button>
   <nam-select [namOptions]='templateOptions' (change)='selectContent($event)'></nam-select>
+
+  <nam-button text='download' (click)='downloadFile($event)'></nam-button>
   <div *ngIf='bodyShowing'>
     <div>Layout for:
       <nam-select [namOptions]='layourOptions' (change)='selectControlsForLayout($event)'></nam-select>
