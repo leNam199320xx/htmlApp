@@ -5,18 +5,18 @@
   <nam-select [namOptions]='templateOptions' (change)='selectContent($event)'></nam-select>
 
   <nam-button text='download' (click)='downloadFile($event)'></nam-button>
-  <div *ngIf='bodyShowing'>
-    <div>Layout for:
-      <nam-select [namOptions]='layourOptions' (change)='selectControlsForLayout($event)'></nam-select>
-    </div>
-    <div *ngIf='layouSelected === layout.Header'>
-      <app-controls-header></app-controls-header>
-    </div>
-    <div *ngIf='layouSelected === layout.Main'>
-      <app-controls-main></app-controls-main>
-    </div>
-    <div *ngIf='layouSelected === layout.Footer'>
-      <app-controls-footer></app-controls-footer>
-    </div>
+  <!-- <div *ngIf='bodyShowing'> -->
+  <div>Layout for:
+    <nam-select [namOptions]='layourOptions' (change)='selectControlsForLayout($event)'></nam-select>
   </div>
+  <div *ngIf='layouSelected === layout.Header'>
+    <app-controls-header></app-controls-header>
+  </div>
+  <div *ngIf='layouSelected === layout.Main'>
+    <app-controls-main></app-controls-main>
+  </div>
+  <div *ngIf='layouSelected === layout.Footer'>
+    <app-controls-footer></app-controls-footer>
+  </div>
+  <!-- </div> -->
 </div>

@@ -13,7 +13,6 @@ export class MainControlsComponent {
 
     constructor(private controlsService: ControlsService) {
         if (this.controlsService) {
-            this.grid = this.controlsService.mainGrid;
         }
     }
 

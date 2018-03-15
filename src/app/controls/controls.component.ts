@@ -11,11 +11,10 @@ import { WindowService, ExtFile } from '../../services/window.service';
     templateUrl: 'controls.html'
 })
 export class ControlsComponent implements OnInit {
-    // @ViewChild('btnDefineGrid') btnDefineGrid: ElementRef;
     private _btnDefineGrid: HTMLDivElement;
     private subscription: Subscription;
-    // isGridsBox = false;
-    layouSelected = 0;
+
+    layouSelected = -1;
     gridSelected = 0;
     bodyShowing = false;
     layout = Layout;
@@ -35,50 +34,27 @@ export class ControlsComponent implements OnInit {
         private controlsService: ControlsService,
         private windowService: WindowService,
         @Inject(LoaderService) public loaderService: LoaderService,
-        @Inject(ViewContainerRef) public viewContainerRef: ViewContainerRef
-    ) {
-        this.loaderService.rootViewContainer = this.viewContainerRef;
-    }
+    ) { }
 
-    ngOnInit() {
-    }
+    ngOnInit() { }
 
     openGridsBox() {
     }
 
-    selectContent(event: Event) {
-        this.gridSelected = parseInt((<HTMLSelectElement>event.target).value, 10);
-        const data = 'page ' + this.gridSelected + ' selected';
-        if (!this.loaderService.bodyComponent) {
-            this.commonService.showNoti(data);
-            this.loaderService.addBodyComponent();
-        }
+    selectContent() {
         this.bodyShowing = true;
+        this.loaderService.addBodyComponent();
     }
 
     selectControlsForLayout(event: Event) {
-        const value = parseInt((<HTMLSelectElement>event.target).value, 10);
-        this.layouSelected = value;
-
-        if (value === Layout.Header) {
-        } else if (value === Layout.Main) {
-            this.controlsService.mainGrid = (<any>this.loaderService.bodyComponent.Main).grid;
-        } else if (value === Layout.Footer) {
-        }
+        this.layouSelected = parseInt((<HTMLSelectElement>event.target).value, 10);
     }
 
     clear() {
         this.loaderService.clearComponent();
     }
 
-    downloadFile(event: Event) {
-        const file1 = this.windowService.saveFile('function hello() {}', 'nam', ExtFile.JS, false, false);
-        const file2 = this.windowService.saveFile('body {}', 'nam', ExtFile.CSS, false, false);
-        const file3 = this.windowService.saveFile('<div>xin chào các bạn</div>', 'nam', ExtFile.HTML, true, true);
-        file1.click();
-        file2.click();
-        file3.click();
-    }
+    downloadFile(event: Event) { }
 }
 
 

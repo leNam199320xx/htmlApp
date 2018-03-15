@@ -1,6 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { ControlsService } from '../controls.service';
-import { HeaderModel } from '../../models/HeaderModel';
+import { StylesModel } from '../../models/StylesModel';
 import { NamSelectModel } from '../../namcontrols/model/NamSelectModel';
 @Component({
     selector: 'app-controls-header',
@@ -8,90 +8,96 @@ import { NamSelectModel } from '../../namcontrols/model/NamSelectModel';
 })
 
 
-export class HeaderControlsComponent implements OnInit {
-    private currentHeader: HeaderModel;
-    private defaultHeader: HeaderModel = {
-        fontSize: 10,
-        height: HeaderSizeDefine.normal,
-        backgroundColor: 'blue',
-        color: 'white',
-        element: null
-    };
+export class HeaderControlsComponent implements OnInit, AfterViewInit {
+    private header: StylesModel;
+
     headerSizeOptions: NamSelectModel[] = [
-        { text: 'small', value: HeaderSizeDefine.small.toString() },
-        { text: 'normal', value: HeaderSizeDefine.normal.toString() },
-        { text: 'large', value: HeaderSizeDefine.large.toString() }
+        { text: 'small', value: HeaderSizeDefine.small.toString(), selected: true },
+        { text: 'normal', value: HeaderSizeDefine.normal.toString(), selected: false },
+        { text: 'large', value: HeaderSizeDefine.large.toString(), selected: false }
     ];
     colorOptions: NamSelectModel[] = [
-        { text: 'red', value: 'red' },
-        { text: 'blue', value: 'blue' },
-        { text: 'white', value: 'white' },
-        { text: 'yellow', value: 'yellow' },
-        { text: 'gray', value: 'gray' }
+        { text: 'red', value: 'red', selected: true },
+        { text: 'blue', value: 'blue', selected: false },
+        { text: 'white', value: 'white', selected: false },
+        { text: 'yellow', value: 'yellow', selected: false },
+        { text: 'gray', value: 'gray', selected: false }
     ];
     navAlignOptions: NamSelectModel[] = [
-        { text: 'căn trái', value: 'left' },
-        { text: 'căn giữa', value: 'center' },
-        { text: 'căn phải', value: 'right' },
+        { text: 'căn trái', value: 'left', selected: true },
+        { text: 'căn giữa', value: 'center', selected: false },
+        { text: 'căn phải', value: 'right', selected: false }
     ];
-    header: HTMLElement;
 
     @ViewChild('headerHeight') HeaderHeightElement: ElementRef;
     @ViewChild('headerFontSize') HeaderFontSizeElement: ElementRef;
     @ViewChild('headerBackgroundColor') HeaderBackgroundColorElement: ElementRef;
+    @ViewChild('headerColor') HeaderColor: ElementRef;
+
+    sHeight: HTMLSelectElement;
+    sColor: HTMLSelectElement;
+    sBackgroundColor: HTMLSelectElement;
 
     constructor(private controlsService: ControlsService) {
+        this.header = this.controlsService.header;
+    }
+
+    ngAfterViewInit() {
     }
 
     ngOnInit() {
-        this.currentHeader = this.controlsService.header;
-        if (!this.controlsService.headerCreated) {
-            this.controlsService.headerCreated = true;
+        this.sBackgroundColor = (<any>this.HeaderBackgroundColorElement).select.nativeElement;
+        this.sHeight = (<any>this.HeaderHeightElement).select.nativeElement;
+        this.sColor = (<any>this.HeaderColor).select.nativeElement;
+
+        this.sBackgroundColor.selectedIndex = 0;
+        this.sHeight.selectedIndex = 0;
+        this.sColor.selectedIndex = 0;
+
+        setTimeout(() => {
             this.setDefault();
-        }
+        }, 2000);
     }
 
-    selectHeader(event: Event) {
-        const val = parseInt((<HTMLSelectElement>event.target).value, 10);
-        this.currentHeader.height = val;
+    selectHeader() {
+        const val = parseInt(this.sHeight.value, 10);
+        this.header.class.styles.height = val + 'px';
         this.updateLayout();
     }
 
-    selectBackgroundColor(event: Event) {
-        const val = (<HTMLSelectElement>event.target).value;
-        this.currentHeader.backgroundColor = val;
+    selectBackgroundColor() {
+        const val = this.sBackgroundColor.value;
+        this.header.class.styles.backgroundColor = val;
         this.updateLayout();
     }
-    selectColor(event: Event) {
-        const val = (<HTMLSelectElement>event.target).value;
-        this.currentHeader.color = val;
+    selectColor() {
+        const val = this.sColor.value;
+        this.header.class.styles.color = val;
         this.updateLayout();
     }
 
     inpHeaderFontSize(event: Event) {
         const val = parseInt((<HTMLSelectElement>event.target).value, 10);
-        this.currentHeader.fontSize = val;
+        this.header.class.styles.fontSize = val + 'px';
         this.updateLayout();
     }
 
     inpBackgroundColor(event: Event) {
         const val = (<HTMLSelectElement>event.target).value;
-        this.currentHeader.backgroundColor = val;
+        this.header.class.styles.backgroundColor = val;
         this.updateLayout();
     }
 
     inpColor(event: Event) {
         const val = (<HTMLSelectElement>event.target).value;
-        this.currentHeader.color = val;
+        this.header.class.styles.color = val;
         this.updateLayout();
     }
 
     setDefault() {
-        this.currentHeader.height = this.defaultHeader.height;
-        this.currentHeader.fontSize = this.defaultHeader.fontSize;
-        this.currentHeader.backgroundColor = this.defaultHeader.backgroundColor;
-        this.currentHeader.color = this.defaultHeader.color;
-        this.updateLayout();
+        this.selectHeader();
+        this.selectBackgroundColor();
+        this.selectColor();
     }
 
     alignNavLeft(event: Event) {
@@ -110,17 +116,8 @@ export class HeaderControlsComponent implements OnInit {
         console.log('add nav');
     }
 
-    updateValueOftControls() {
-        this.HeaderFontSizeElement.nativeElement.value = this.defaultHeader.fontSize;
-    }
-
     updateLayout() {
-        this.header = <HTMLElement>this.currentHeader.element.nativeElement;
-        this.header.style.height = this.currentHeader.height + 'px';
-        this.header.style.fontSize = this.currentHeader.fontSize + 'px';
-        this.header.style.backgroundColor = this.currentHeader.backgroundColor;
-        this.header.style.color = this.currentHeader.color;
-        this.updateValueOftControls();
+        this.controlsService.update();
     }
 
 }

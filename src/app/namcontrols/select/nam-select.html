@@ -1,3 +1,5 @@
-<select class='nam-select border-none'>
-    <option *ngFor="let option of namOptions" value="{{option.value}}"> {{option.text}}</option>
+<select #select class='nam-select border-none'>
+    <ng-container *ngFor='let option of namOptions; let i = index;'>
+        <option value="{{option.value}}"> {{option.text}}</option>
+    </ng-container>
 </select>

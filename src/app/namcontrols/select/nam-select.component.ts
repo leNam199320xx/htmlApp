@@ -1,4 +1,4 @@
-import { Component, Output, Input, EventEmitter } from '@angular/core';
+import { Component, Output, Input, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { NamSelectModel } from '../model/NamSelectModel';
 @Component({
     // tslint:disable-next-line:component-selector
@@ -16,4 +16,6 @@ export class NamSelectComponent {
     @Input('value') value: string;
 
     @Input('namOptions') namOptions: NamSelectModel[];
+
+    @ViewChild('select') select: ElementRef;
 }

@@ -1,12 +1,13 @@
 import { HostListener, Injectable, OnDestroy } from '@angular/core';
+import { StylesModel } from '../app/models/StylesModel';
 
 @Injectable()
 export class WindowService implements OnDestroy {
     currentBreakpoint: Breakpoints;
+
     body = <HTMLBodyElement>document.body;
     header = <HTMLHeadElement>document.head;
-    styleDefine = <HTMLStyleElement>document.createElement('style');
-    classesDefine: ClassDefine[] = [];
+    headerModel: StylesModel;
     breakpoints: Breakpoints[] = [
         {
             query: '(min-width: 1280px)',
@@ -36,17 +37,6 @@ export class WindowService implements OnDestroy {
     ];
     constructor() {
         this.setBreakpoint();
-        this.createStyle([
-            {
-                name: '.name1',
-                attributes: [
-                    {
-                        name: 'background-color',
-                        value: 'black'
-                    }
-                ]
-            }
-        ]);
     }
     matchMedia(_mediaquery) {
         const result = <MediaQueryList>window.matchMedia(_mediaquery);
@@ -63,25 +53,19 @@ export class WindowService implements OnDestroy {
             }
         });
     }
-    createStyle(_classNames: ClassDefine[]) {
-        let classesFull = '';
-        for (let i = 0; i < _classNames.length; i++) {
-            let nameForClass = '';
-            let attributesForClass = '';
-            this.classesDefine.push({
-                name: _classNames[i].name,
-                attributes: _classNames[i].attributes
-            });
-
-            for (let j = 0; j < _classNames[i].attributes.length; j++) {
-                attributesForClass += _classNames[i].attributes[j].name + ': ' + _classNames[i].attributes[j].value + ';';
-            }
-            nameForClass = _classNames[i].name + '{' + attributesForClass + '}';
-            classesFull += nameForClass;
+    createStyle(_model: StylesModel) {
+        const newStyleTag = <HTMLStyleElement>document.createElement('style');
+        for (let j = 0; j < _model.class.styles.length; j++) {
         }
-        this.styleDefine.innerHTML = classesFull;
-        this.styleDefine.type = 'text/css';
-        this.header.appendChild(this.styleDefine);
+        const st: HTMLStyleElement = {} as any;
+        console.log(st);
+        st.style.backgroundColor = 'red';
+        st.style.color = 'blue';
+        const stringClass = _model.class.name + '{' + + '}';
+
+        newStyleTag.innerHTML = stringClass;
+        newStyleTag.type = 'text/css';
+        this.header.appendChild(newStyleTag);
     }
     createScript() {
 
@@ -124,16 +108,6 @@ export interface Breakpoints {
     device: string;
     query: string;
     value: number;
-}
-
-export interface ClassDefine {
-    name: string;
-    attributes: ClassAttribute[];
-}
-
-export interface ClassAttribute {
-    name: string;
-    value: string;
 }
 
 

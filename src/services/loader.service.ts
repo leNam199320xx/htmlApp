@@ -10,18 +10,14 @@ import { GridContentComponent } from '../app/content/grid/grid.component';
 @Injectable()
 export class LoaderService {
     rootViewContainer: ViewContainerRef;
-    bodyComponent: BodyContentComponent;
-    headerComponent: HeaderContentComponent;
-    mainComponent: MainContentComponent;
-    gridComponent: GridContentComponent;
 
-    constructor(@Inject(ComponentFactoryResolver) public factoryResolver) { }
+    constructor(@Inject(ComponentFactoryResolver) public factoryResolver: ComponentFactoryResolver) { }
 
     addBodyComponent() {
+        this.clearComponent();
         const factory = this.factoryResolver.resolveComponentFactory(BodyContentComponent);
-        const component = factory.create(this.rootViewContainer.parentInjector);
+        const component = factory.create(this.rootViewContainer.injector);
         this.rootViewContainer.insert(component.hostView);
-        this.bodyComponent = <BodyContentComponent>component._component;
     }
 
     clearComponent() {

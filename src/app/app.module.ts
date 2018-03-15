@@ -13,7 +13,7 @@ import { ControlsComponent } from '../app/controls/controls.component';
 import { HeaderControlsComponent } from '../app/controls/header/header.component';
 import { MainControlsComponent } from '../app/controls/main/main.component';
 import { FooterControlsComponent } from '../app/controls/footer/footer.component';
-import { ContentComponent } from '../app/content/content.component';
+import { ContentComponent, ContentDirective } from '../app/content/content.component';
 
 import { BodyContentComponent } from './content/body/body.component';
 import { HeaderContentComponent } from './content/header/header.component';
@@ -37,7 +37,8 @@ import { ButtonContentComponent } from './content/Button/button.component';
     HeaderContentComponent,
     MainContentComponent,
     FooterContentComponent,
-    GridContentComponent
+    GridContentComponent,
+    ContentDirective
   ],
   imports: [
     BrowserModule,
