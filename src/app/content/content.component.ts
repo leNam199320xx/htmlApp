@@ -18,6 +18,7 @@ export class ContentDirective {
 export class ContentComponent implements OnDestroy, AfterViewInit {
     title = '';
     private subscription: Subscription;
+
     @ViewChild(ContentDirective) content: ContentDirective;
 
     constructor(
@@ -31,6 +32,7 @@ export class ContentComponent implements OnDestroy, AfterViewInit {
 
     ngAfterViewInit() {
         this.loaderService.rootViewContainer = this.content.viewContainerRef;
+        this.loaderService.addBodyComponent();
     }
 
     ngOnDestroy() {

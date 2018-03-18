@@ -55,13 +55,12 @@ export class WindowService implements OnDestroy {
     }
     createStyle(_model: StylesModel) {
         const newStyleTag = <HTMLStyleElement>document.createElement('style');
-        for (let j = 0; j < _model.class.styles.length; j++) {
+        for (let j = 0; j < _model.element.style.length; j++) {
         }
         const st: HTMLStyleElement = {} as any;
-        console.log(st);
         st.style.backgroundColor = 'red';
         st.style.color = 'blue';
-        const stringClass = _model.class.name + '{' + + '}';
+        const stringClass = '.header {' + + '}';
 
         newStyleTag.innerHTML = stringClass;
         newStyleTag.type = 'text/css';

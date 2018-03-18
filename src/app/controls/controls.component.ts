@@ -13,7 +13,7 @@ import { WindowService, ExtFile } from '../../services/window.service';
 export class ControlsComponent implements OnInit {
     private _btnDefineGrid: HTMLDivElement;
     private subscription: Subscription;
-
+    @ViewChild('selectTemplate') selectTemplate: ElementRef;
     layouSelected = -1;
     gridSelected = 0;
     bodyShowing = false;
@@ -36,15 +36,16 @@ export class ControlsComponent implements OnInit {
         @Inject(LoaderService) public loaderService: LoaderService,
     ) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+    }
 
     openGridsBox() {
     }
 
     selectContent() {
-        this.bodyShowing = true;
         this.loaderService.addBodyComponent();
     }
+
 
     selectControlsForLayout(event: Event) {
         this.layouSelected = parseInt((<HTMLSelectElement>event.target).value, 10);

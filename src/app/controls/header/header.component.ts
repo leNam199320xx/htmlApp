@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { ControlsService } from '../controls.service';
+import { ControlsService, ItemControl } from '../controls.service';
 import { StylesModel } from '../../models/StylesModel';
 import { NamSelectModel } from '../../namcontrols/model/NamSelectModel';
 @Component({
@@ -9,117 +9,115 @@ import { NamSelectModel } from '../../namcontrols/model/NamSelectModel';
 
 
 export class HeaderControlsComponent implements OnInit, AfterViewInit {
-    private header: StylesModel;
+    private header: ItemControl;
 
     headerSizeOptions: NamSelectModel[] = [
         { text: 'small', value: HeaderSizeDefine.small.toString(), selected: true },
         { text: 'normal', value: HeaderSizeDefine.normal.toString(), selected: false },
-        { text: 'large', value: HeaderSizeDefine.large.toString(), selected: false }
-    ];
+        { text: 'large', value: HeaderSizeDefine.large.toString(), selected: false }];
     colorOptions: NamSelectModel[] = [
         { text: 'red', value: 'red', selected: true },
         { text: 'blue', value: 'blue', selected: false },
         { text: 'white', value: 'white', selected: false },
         { text: 'yellow', value: 'yellow', selected: false },
-        { text: 'gray', value: 'gray', selected: false }
-    ];
+        { text: 'gray', value: 'gray', selected: false }];
     navAlignOptions: NamSelectModel[] = [
         { text: 'căn trái', value: 'left', selected: true },
         { text: 'căn giữa', value: 'center', selected: false },
-        { text: 'căn phải', value: 'right', selected: false }
-    ];
+        { text: 'căn phải', value: 'right', selected: false }];
+    headerGridOptions: NamSelectModel[] = [
+        { text: '1', value: '1', selected: true },
+        { text: '2', value: '2', selected: false },
+        { text: '3', value: '3', selected: false },
+        { text: '4', value: '4', selected: false }];
 
-    @ViewChild('headerHeight') HeaderHeightElement: ElementRef;
-    @ViewChild('headerFontSize') HeaderFontSizeElement: ElementRef;
-    @ViewChild('headerBackgroundColor') HeaderBackgroundColorElement: ElementRef;
+
+    @ViewChild('headerHeight') HeaderHeight: ElementRef;
+    @ViewChild('headerFontSize') HeaderFontSize: ElementRef;
+    @ViewChild('headerBackgroundColor') HeaderBackgroundColor: ElementRef;
     @ViewChild('headerColor') HeaderColor: ElementRef;
+    @ViewChild('headerGrid') HeaderGrid: ElementRef;
 
     sHeight: HTMLSelectElement;
     sColor: HTMLSelectElement;
     sBackgroundColor: HTMLSelectElement;
+    sGrid: HTMLSelectElement;
 
     constructor(private controlsService: ControlsService) {
         this.header = this.controlsService.header;
+        this.header.element.style.display = 'flex';
+        this.header.element.style.flexDirection = 'row';
+        this.header.element.style.flexWrap = 'wrap';
+        this.header.element.style.width = '100%';
+        this.controlsService.headerFixed(true);
     }
 
     ngAfterViewInit() {
+        this.setDefault();
     }
 
     ngOnInit() {
-        this.sBackgroundColor = (<any>this.HeaderBackgroundColorElement).select.nativeElement;
-        this.sHeight = (<any>this.HeaderHeightElement).select.nativeElement;
-        this.sColor = (<any>this.HeaderColor).select.nativeElement;
-
-        this.sBackgroundColor.selectedIndex = 0;
-        this.sHeight.selectedIndex = 0;
-        this.sColor.selectedIndex = 0;
-
-        setTimeout(() => {
-            this.setDefault();
-        }, 2000);
+        this.sBackgroundColor = <HTMLSelectElement>(<any>this.HeaderBackgroundColor).select.nativeElement;
+        this.sColor = <HTMLSelectElement>(<any>this.HeaderColor).select.nativeElement;
+        this.sHeight = <HTMLSelectElement>(<any>this.HeaderHeight).select.nativeElement;
+        this.sGrid = <HTMLSelectElement>(<any>this.HeaderGrid).select.nativeElement;
+        this.sBackgroundColor.selectedindex = 0;
+        this.sHeight.selectedindex = 0;
+        this.sColor.selectedindex = 0;
+        this.sGrid.selectedindex = 0;
     }
-
+    selectGrid() {
+        const val = parseInt(this.sGrid.value, 10);
+        this.header.removeAll();
+        for (let i = 0; i < val; i++) {
+            const child = this.header.addChild();
+            // set default for child item
+            child.changeSize((100 / val) + '%', '100%');
+        }
+    }
     selectHeader() {
-        const val = parseInt(this.sHeight.value, 10);
-        this.header.class.styles.height = val + 'px';
-        this.updateLayout();
+        this.header.changeSize('100%', parseInt(this.sHeight.value, 10) + 'px');
+        this.controlsService.updateBodyPosition();
     }
 
     selectBackgroundColor() {
-        const val = this.sBackgroundColor.value;
-        this.header.class.styles.backgroundColor = val;
-        this.updateLayout();
+        this.header.changeBackground(this.sBackgroundColor.value);
     }
     selectColor() {
-        const val = this.sColor.value;
-        this.header.class.styles.color = val;
-        this.updateLayout();
+        this.header.changeColor(this.sColor.val);
     }
 
     inpHeaderFontSize(event: Event) {
-        const val = parseInt((<HTMLSelectElement>event.target).value, 10);
-        this.header.class.styles.fontSize = val + 'px';
-        this.updateLayout();
+        this.header.changeFontSize((<HTMLSelectElement>event.target).value + 'px');
     }
 
     inpBackgroundColor(event: Event) {
-        const val = (<HTMLSelectElement>event.target).value;
-        this.header.class.styles.backgroundColor = val;
-        this.updateLayout();
+        this.header.changeBackground((<HTMLSelectElement>event.target).value);
     }
 
     inpColor(event: Event) {
-        const val = (<HTMLSelectElement>event.target).value;
-        this.header.class.styles.color = val;
-        this.updateLayout();
+        this.header.changeColor((<HTMLSelectElement>event.target).value);
     }
 
     setDefault() {
         this.selectHeader();
         this.selectBackgroundColor();
         this.selectColor();
+        this.selectGrid();
+        this.controlsService.updateBodyPosition();
     }
 
     alignNavLeft(event: Event) {
-        console.log('căn trái');
+        this.header.element.style.textAlign = 'left';
     }
 
     alignNavRight(event: Event) {
-        console.log('căn phải');
+        this.header.element.style.textAlign = 'right';
     }
 
     alignNavCenter(event: Event) {
-        console.log('căn giữa');
+        this.header.element.style.textAlign = 'center';
     }
-
-    addNavTop(event: Event) {
-        console.log('add nav');
-    }
-
-    updateLayout() {
-        this.controlsService.update();
-    }
-
 }
 
 export enum HeaderSizeDefine {

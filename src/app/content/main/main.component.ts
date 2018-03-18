@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { GridModel } from '../grid/grid.component';
+import { ControlsService } from '../../controls/controls.service';
 
 @Component({
     selector: 'app-content-dynamic-main',
@@ -7,14 +8,11 @@ import { GridModel } from '../grid/grid.component';
 })
 
 export class MainContentComponent implements OnInit {
-    @ViewChild('Grid') GridRef: ElementRef; // this is a component
-    grid: GridModel;
-    constructor() {
+    @ViewChild('body') MAIN: ElementRef; // this is a component
+    constructor(private controlsService: ControlsService) {
     }
 
     ngOnInit() {
-        this.grid = (<any>this.GridRef).grid;
-        this.grid.row = 10;
-        this.grid.column = 10;
+        this.controlsService.body.element = this.MAIN.nativeElement;
     }
 }

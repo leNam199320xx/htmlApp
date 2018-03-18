@@ -1,7 +1,11 @@
 <div class="control-header">
+  <div class=row>
+    grid 
+    <nam-select #headerGrid [namOptions]='headerGridOptions' (change)='selectGrid()'></nam-select>
+  </div>
   <div class='row'>
     size
-    <nam-select #headerHeight [namOptions]='headerSizeOptions' (change)='selectHeader($event)'></nam-select>
+    <nam-select #headerHeight [namOptions]='headerSizeOptions' (change)='selectHeader()'></nam-select>
   </div>
   <div class="row">
     font size
@@ -9,7 +13,7 @@
   </div>
   <div class='row'>
     background
-    <nam-select #headerBackgroundColor [namOptions]='colorOptions' (change)='selectBackgroundColor($event)'></nam-select>
+    <nam-select #headerBackgroundColor [namOptions]='colorOptions' (change)='selectBackgroundColor()'></nam-select>
     <input #hearderInpBackgroundColor type="color" (input)='inpBackgroundColor($event)' />
   </div>
   <div class='row'>

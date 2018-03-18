@@ -1,8 +1,6 @@
 export interface StylesModel {
-    element: HTMLElement;
-    id: string;
-    class: {
-        name: string;
-        styles: CSSStyleDeclaration;
-    };
+    element?: HTMLElement;
+    grid?: HTMLElement[];
+    title?: string;
+    id?: string;
 }

@@ -15,7 +15,6 @@ export class MainControlsComponent {
         if (this.controlsService) {
         }
     }
-
     setGrid(_grid: GridModel) {
         this.grid = _grid;
     }
